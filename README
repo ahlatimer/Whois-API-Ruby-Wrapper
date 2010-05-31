@@ -1,0 +1,18 @@
+A simple wrapper for http://www.whoisxmlapi.com/. There isn't much to the actual Whois API, but this might save someone a few minutes. I've tested it in Ruby 1.8.6 and 1.8.7.
+
+Example:
+
+    require 'whois_api_wrapper'
+    require 'hpricot'
+    
+    USERNAME = 'andrewlat'
+    PASSWORD = 'secret'
+    
+    whois = WhoisApiWrapper.new(USERNAME, PASSWORD)
+    response = whois.request_whois('http://github.com')
+    doc = Hpricot(response.body)
+    
+    expiration_date = (doc / 'expiresdate')
+    nameservers = (doc / 'nameservers')
+    
+    # ... 
